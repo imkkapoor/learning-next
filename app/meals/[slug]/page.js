@@ -3,6 +3,20 @@ import classes from "./page.module.css";
 import { getMeal } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
+// dynamic meta-data
+export async function generateMetadata({ params }) {
+    const meal = getMeal(params.slug);
+    
+    if (!meal) {
+        notFound();
+    }
+
+    return {
+        title: meal.title,
+        description: meal.summary,
+    };
+}
+
 export default function Meal({ params }) {
     const meal = getMeal(params.slug);
     if (!meal) {
@@ -15,7 +29,11 @@ export default function Meal({ params }) {
         <>
             <header className={classes.header}>
                 <div className={classes.image}>
-                    <Image src={`https://vinayak-nextjs-demo-users-image.s3.us-east-2.amazonaws.com/${image}`} alt={meal.title} fill />
+                    <Image
+                        src={`https://vinayak-nextjs-demo-users-image.s3.us-east-2.amazonaws.com/${meal.image}`}
+                        alt={meal.title}
+                        fill
+                    />
                 </div>
                 <div className={classes.headerText}>
                     <h1>{meal.title}</h1>

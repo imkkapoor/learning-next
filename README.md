@@ -1,0 +1,1 @@
+Welcome to this repository! Here, I'm keeping track of my progress as I dive into the world of Next.js, exploring its features and experimenting with various concepts.
